@@ -111,11 +111,11 @@ body {
 
 .volume {
     position:relative;
-    /* min-width:18px; */
+    min-width:20px;
 }
 
 .p-volume-open {
-    position: absolute;
+    
 }
 
 .p-volume-close {
@@ -162,6 +162,15 @@ input[type=range]:focus::-webkit-slider-runnable-track {
     margin-bottom:4px;
     min-height:83.8px;
 }
+.song.active {
+    background-color: var(--primary-color);
+}
+
+.song.active .title,
+.song.active .author,
+.song.active .option-icon {
+    color:#fff;
+}
 
 .song:hover {
     background-color:rgba(0, 0, 0, 0.01)
@@ -198,6 +207,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 .option-icon{
     flex:1;
     padding:0.6em;
+    color:var(--text-color)
 }
 
 

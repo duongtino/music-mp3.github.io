@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" style="border-radius: 50%;" href="./access/img/shortcut.png" type="image/x-icon">
+    <title>MUSIC MP3</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="./access/fonts/icofont/icofont.min.css">
+    <link rel="stylesheet" href="./access/css/grid.css">
+    <link rel="stylesheet" href="./access/css/pretty.css">
+    <link rel="stylesheet" href="./access/css/main.css">
+</head>
+<body>
+    <div class="container-music">
+        <header class="nav">
+            <span class="icon-container">
+                <i class="icofont-rounded-down"></i>
+            </span>
+            <div class="header-heading">
+                <p class="nav-head">New playing</p>
+                <h3 class="nav-content">
+                    Sting 57th & 9th
+                </h3>
+            </div>
+            <span class="icon-container">
+                <i class="icofont-plus"></i>
+            </span>
+        </header>
+
+        <div class="cd">
+            <img src="" alt="" class="cd-img">
+        </div>
+
+        <div class="navigation">
+            <div class="navigation-item random">
+                <i class="icofont-random"></i>
+            </div>
+            <div class="navigation-item reply">
+                <i class="icofont-ui-reply"></i>
+            </div>
+            <div class="navigation-item play-pause">
+                <div class="p-open">
+                    <i class="icofont-pause"></i>
+                </div>
+                <div class="p-close">
+                    <i class="icofont-play-alt-1"></i>
+                </div>
+            </div>
+            <div class="navigation-item next-song">
+                <i class="icofont-ui-next"></i>
+            </div>
+            <div class="navigation-item volume">
+                <div class="p-volume-open">
+                    <i class="icofont-volume-down"></i>
+                </div>
+                <div class="p-volume-close">
+                    <i class="icofont-volume-off"></i>
+                </div>
+            </div>
+            
+        </div>
+        <input type="range" class="progress" id="progress" value="0" step="1" min="0" max="100">
+
+        <audio src="" class="audio"></audio>
+    </div>
+    
+    <div class="list-music">
+        
+    </div>
+
+    <div class="footer">
+        <span class="icon-footer">
+            <i class="icofont-home"></i>
+        </span>
+        <span class="icon-footer">
+            <i class="icofont-music-note"></i>
+        </span>
+        <span class="icon-footer">
+            <i class="icofont-play-alt-1 icon-play"></i>
+        </span>
+        <span class="icon-footer">
+            <i class="icofont-search"></i>
+        </span>
+        <span class="icon-footer">
+            <i class="icofont-navigation-menu"></i>
+        </span>
+    </div>
+    <script>
+        
+        const cdFather = document.querySelector('.cd')
+        const cd = document.querySelector('.cd-img');
+        const nav_content = document.querySelector('.nav-content');
+        const audio = document.querySelector('.audio');
+        const checkbox = document.querySelector('#checkbox');
+        const playAudio = document.querySelector('.play-pause');
+        const pause = document.querySelector('.p-close');
+        const play = document.querySelector('.p-open');
+        const isPlaying = false;
+
+        const app = {
+            currentIndex:0, //Lấy chỉ mục bằng 0
+            songs:[
+                {
+                    name:'Mashup LoveSongs',
+                    singer:"Bùi Anh Tuấn",
+                    path:'./access/song/Bùi Anh Tuấn -đã sai từ lúc đầu- nên bây giờ -cạn dòng nước mắt- Love Songs - Cover.mp3',
+                    image:'./access/img/mashup-loveSongs.png'
+                },
+                {
+                    name:'Cưới nhau đi ( yes i do)',
+                    singer:"Bùi Anh Tuấn - Hiền Hồ",
+                    path:'./access/song/Cưới nhau đi ( yes i do) - Bùi Anh Tuấn , Hiền Hồ.mp3',
+                    image:'./access/img/cuoinhaudi.png'
+                },
+                {
+                    name:'Đường ai nấy đi',
+                    singer:"Bùi Anh Tuấn",
+                    path:'./access/song/Đường Ai Nấy Đi (Lofi Ver.) - Bùi Anh Tuấn x Freak D.mp3',
+                    image:'./access/img/duongainaydi.png'
+                },
+                {
+                    name:'Hẹn một mai',
+                    singer:"Bùi Anh Tuấn",
+                    path:'./access/song/Hẹn một mai ‣ Bùi Anh Tuấn.mp3',
+                    image:'./access/img/henmotmai.png'
+                },
+                {
+                    name:'Hoang mang',
+                    singer:"Bùi Anh Tuấn",
+                    path:'./access/song/HOANG MANG - BÙI ANH TUẤN.mp3',
+                    image:'./access/img/hoangmang.png'
+                },
+                {
+                    name:'Yêu em rất nhiều',
+                    singer:"Hoàng Tôn",
+                    path:'./access/song/HOÀNG TÔN - YÊU EM RẤT NHIỀU.mp3',
+                    image:'./access/img/yeuemratnhieu.png'
+                },
+                {
+                    name:'Lặng yên',
+                    singer:"Bùi Anh Tuấn",
+                    path:'./access/song/Lặng Yên - Bùi Anh Tuấn @ Swing Lounge.mp3',
+                    image:'./access/img/langyen.png'
+                },
+                {
+                    name:'Mơ hồ',
+                    singer:"Bùi Anh Tuấn",
+                    path:'./access/song/Mơ Hồ - Bùi Anh Tuấn.mp3',
+                    image:'./access/img/moho.png'
+                },
+                {
+                    name:'Nơi tình yêu bắt đầu',
+                    singer:"Bùi Anh Tuấn",
+                    path:'./access/song/Nơi Tình Yêu Bắt Đầu - Bùi Anh Tuấn.mp3',
+                    image:'./access/img/noitinhyeubatdau.png'
+                },
+                {
+                    name:'Nơi tình yêu kết thúc',
+                    singer:"Bùi Anh Tuấn",
+                    path:'./access/song/Nơi Tình Yêu Kết Thúc - Bùi Anh Tuấn.mp3',
+                    image:'./access/img/noitinhyeuketthuc.png'
+                },
+                {
+                    name:'Ta là của nhau',
+                    singer:"Đông Nhi - Ông Cao Thắng",
+                    path:'./access/song/Ta Là Của Nhau - Đông Nhi ft. Ông Cao Thắng - Yeah1 Superstar.mp3',
+                    image:'./access/img/talacuanhau.png'
+                },
+                {
+                    name:'Thuận theo ý trời',
+                    singer:"Bùi Anh Tuấn",
+                    path:'./access/song/Thuận Theo Ý Trời - Bùi Anh Tuấn.mp3',
+                    image:'./access/img/thuantheoytroi.png'
+                }
+                
+            ],
+                
+            render: function () {
+                const htmls = this.songs.map((song,index) => {
+                    return `
+                    <div class="song ${index === this.currentIndex?'active':''}">
+                        <div class="thumb"
+                            style="background-image:url('${song.image}') ;"
+                        >             
+                        </div>
+
+                        <div class="body">
+                            <h3 class="title">
+                                ${song.name}
+                            </h3>
+                            <p class="author">
+                                ${song.singer}
+                            </p>
+                        </div>
+                        <div class="option">
+                            <i class="option-icon icofont-options"></i>
+                        </div>
+                    </div>
+                    `
+                })
+
+                document.querySelector('.list-music').innerHTML = htmls.join("");
+            },
+            defineProperties: function () {
+                Object.defineProperty(this,'currentSong', {
+                    get: function () {
+                        return this.songs[this.currentIndex]
+                    }
+                })
+            },
+
+            handleEvents: function () {
+                const _this = this;
+                const cdWidth = cd.offsetWidth;
+                const cdHeight = cd.offsetHeight;
+
+                //Xử lí CD quay/dừng
+                const cdAnimate = cdFather.animate([
+                    {transform:'rotate(360deg)'}
+                ],{
+                    duration:20000, //10 giây
+                    iterations : Infinity //Vô hạn
+                })
+                cdAnimate.pause()
+
+                //Xử lí khi phóng to thu nhỏ
+                document.onscroll = function () {
+                    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                    const cdWidthNew = cdWidth - scrollTop;
+                    const cdHeightNew = cdHeight - scrollTop;
+                    cd.style.width = cdWidthNew > 0 ?cdWidthNew + 'px':0;
+                    cd.style.height = cdHeightNew > 0?cdHeightNew + 'px':0;
+
+                    cd.style.opacity = cdWidthNew/cdWidth;
+
+                }
+
+                //Xử lí khi click play
+                playAudio.onclick = function () {
+                    if(!_this.isPlaying){
+                        audio.play();
+                        play.style.display = 'block';
+                        pause.style.display = 'none';
+                      
+                    }else {
+                        audio.pause();
+                        play.style.display = 'none';
+                        pause.style.display = 'block';
+                    }               
+                }
+                //Khi song được play/pause
+                audio.onplay = function () {
+                    _this.isPlaying = true;
+                    cdAnimate.play()
+                }
+
+                audio.onpause = function () {
+                    _this.isPlaying = false;
+                    cdAnimate.pause()
+                }
+
+                
+                //Xử lí tiến độ bài hát
+                const progress = document.querySelector('.progress')
+                audio.ontimeupdate = function () {
+                    
+                    if(audio.duration) {
+                        const progressPercent = Math.floor(audio.currentTime / audio.duration * 100)
+                        progress.value = progressPercent;
+                    }                
+                }
+
+                //Xử lí khi tua song 
+                progress.onchange = function (time) {
+                    const seekTime = audio.duration/100 * time.target.value
+                    audio.currentTime = seekTime
+                }
+
+
+                //Xử lí volumn tắt/bật
+                const volume = document.querySelector('.volume');
+                volume.onclick = function () {
+                    const pVolumeOpen = document.querySelector('.p-volume-open');
+                    const pVolumeClose = document.querySelector('.p-volume-close');
+                    const volumeDefault = audio.volume === 1;
+                    if(volumeDefault) {
+                        audio.volume = 0;
+                        pVolumeOpen.style.display ='none';
+                        pVolumeClose.style.display ='block';
+                    }else {
+                        audio.volume = 1;
+                        pVolumeOpen.style.display ='block';
+                        pVolumeClose.style.display ='none';
+                    }
+                }
+
+                //Xử lí lặp lại bài hát
+                const reply = document.querySelector('.reply');
+                const isLoop = true;
+                reply.onclick = function () {
+                    if(reply.style.color === 'var(--text-color)') {
+                        audio.loop = true;
+                        reply.style.color = 'var(--primary-color)';
+                    }else {
+                        audio.loop = false;
+                        reply.style.color = 'var(--text-color)';
+                    }
+
+                }
+                
+                //Xử lí next bài hát
+                document.querySelector('.next-song').onclick = function () {
+                    if(random.style.color === 'var(--text-color)') {
+                        _this.nextSong()                
+                    }else {
+                        _this.playRandomSong()
+                    }
+                    audio.play()                   
+                    _this.render()
+                    play.style.display = 'block';
+                    pause.style.display = 'none';
+                }
+
+                //Xử lí random song
+                const random = document.querySelector('.random')
+                random.onclick = function (){
+                    if(random.style.color === 'var(--text-color)') {
+                        random.style.color = 'var(--primary-color)';
+                    }else {
+                        random.style.color = 'var(--text-color)';
+                    }
+                }
+
+                //Xử lí auto next song
+                audio.onended = function () {
+                    document.querySelector('.next-song').click()
+                    
+                    _this.render()
+                }
+
+            },
+            loadCurrentSong: function () {
+                cd.src = this.currentSong.image;
+                nav_content.textContent = this.currentSong.name;
+                audio.src = this.currentSong.path;
+            },
+
+            nextSong:function () {
+                this.currentIndex++
+                if(this.currentIndex >=this.songs.length) {
+                    this.currentIndex = 0
+                }
+                this.loadCurrentSong()   
+            },
+
+            playRandomSong: function () {
+                let newIndex
+                do {                
+                    newIndex = Math.floor(Math.random() *this.songs.length)
+                    // const arrayindex = arraySongSelected.push(newIndex)
+
+                }while(newIndex === this.currentIndex)
+                // console.log(arraySongSelected)
+                
+                this.currentIndex = newIndex
+                this.loadCurrentSong()
+            },
+
+            start: function () {
+                //Định ngĩa ra các thuộc tính cho object
+                this.defineProperties();  
+
+                //Lắng nghe/xử lí các sự kiện (DOM events)
+                this.handleEvents();
+
+                //Tải thông tin bài đầu tiên
+                this.loadCurrentSong();
+
+                //Render playlist
+                this.render();
+
+                this.nextSong();
+            }
+        }
+        
+        app.start()
+    </script>
+</body>
+</html>
